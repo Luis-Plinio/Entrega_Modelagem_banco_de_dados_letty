@@ -128,7 +128,6 @@ Entidade detentora dos produtos alimentícios e contratante da representação.
 ### **2. PRODUTO**
 
 * **ID_PRODUTO** (Chave Primária): Identificador único do produto no sistema.
-* **ID_FABRICANTE** (Chave Estrangeira): Vincula o produto ao seu fabricante.
 * **CD_EAN**: Código de barras global do produto (Chave única).
 * **CD_NCM**: Nomenclatura Comum do Mercosul para fins de tributação fiscal.
 * **DS_PRODUTO**: Descrição comercial detalhada do item.
@@ -146,7 +145,6 @@ Entidade detentora dos produtos alimentícios e contratante da representação.
 ### **3. LOTE**
 
 * **ID_LOTE** (Chave Primária): Identificador do lote no banco de dados.
-* **ID_PRODUTO** (Chave Estrangeira): Chave estrangeira que vincula o lote a um produto.
 * **CD_NUMERO_LOTE**: Código de controle de lote atribuído pela fábrica.
 * **QT_PRODUZIDA**: Quantidade total de unidades fabricadas na remessa.
 * **DT_FABRICACAO**: Data de industrialização da mercadoria.
@@ -172,7 +170,6 @@ Entidade detentora dos produtos alimentícios e contratante da representação.
 ### **5. LOJA**
 
 * **ID_LOJA** (Chave Primária): Identificador interno da filial/loja.
-* **ID_REDE** (Chave Estrangeira): Referência à rede/matriz proprietária.
 * **CD_CODIGO_LOJA_REDE**: Código de identificação interno da loja no sistema da própria rede.
 * **NM_LOJA**: Nome de identificação da filial (ex.: "Loja 02 - Centro").
 * **CD_CNPJ**: CNPJ próprio da filial física (Chave única).
@@ -185,8 +182,6 @@ Entidade detentora dos produtos alimentícios e contratante da representação.
 ### **6. CONTATO**
 
 * **ID_CONTATO** (Chave Primária): Identificador único do registro de contato.
-* **ID_REDE** (Chave Estrangeira): Associação obrigatória do profissional à rede compradora.
-* **ID_LOJA** (Chave Estrangeira, *(Opcional)*): Vínculo com uma loja/filial específica, se aplicável.
 * **NM_CONTATO**: Nome completo do interlocutor.
 * **DS_SETOR**: Setor do profissional (ex.: Fiscal, Logística, Pricing, Compras).
 * **DS_CARGO**: Cargo ou função desempenhada na empresa cliente.
@@ -205,19 +200,9 @@ Entidade detentora dos produtos alimentícios e contratante da representação.
 
 ---
 
-### **8. REPRESENTANTE**
-
-* **ID_REPRESENTANTE** (Chave Primária): Identificador único do representante comercial.
-* *(Modelado no sistema sem atributos adicionais por decisão de projeto).*
-
----
-
-### **9. PEDIDO**
+### **8. PEDIDO**
 
 * **ID_PEDIDO** (Chave Primária): Identificador do pedido de venda.
-* **ID_REDE** (Chave Estrangeira): Identificador da rede cliente compradora.
-* **ID_REPRESENTANTE** (Chave Estrangeira): Identificador do representante emissor do pedido.
-* **ID_LOJA** (Chave Estrangeira): Identificador da loja recebedora da entrega.
 * **DT_PEDIDO**: Data de emissão e negociação do pedido.
 * **DT_PREVISTA_ENTREGA** *(Opcional)*: Data negociada para descarregamento na loja.
 * **VL_PRECO_TOTAL**: Valor monetário total consolidado dos itens do pedido.
@@ -226,21 +211,9 @@ Entidade detentora dos produtos alimentícios e contratante da representação.
 
 ---
 
-### **10. ITEM_PEDIDO**
-
-* **ID_ITEM_PEDIDO** (Chave Primária): Identificador único da linha de item do pedido.
-* **ID_PEDIDO** (Chave Estrangeira): Vincula o item ao pedido correspondente.
-* **ID_PRODUTO** (Chave Estrangeira): Identifica o produto negociado.
-* **QT_PEDIDA**: Quantidade comercializada do produto no pedido.
-* **VL_PRECO_NEGOCIADO**: Preço unitário fechado/negociado para o produto na venda.
-
----
-
-### **11. VISITA**
+### **9. VISITA**
 
 * **ID_VISITA** (Chave Primária): Código identificador da auditoria/visita presencial.
-* **ID_PROMOTOR** (Chave Estrangeira): Identificador do promotor responsável pela visita.
-* **ID_LOJA** (Chave Estrangeira): Identificador da loja auditada.
 * **ID_PRODUTO** (Chave Estrangeira): Produto verificado em gôndola/estoque durante a visita.
 * **DT_VISITA**: Data do atendimento em loja.
 * **HR_INICIO**: Horário de início do atendimento.
@@ -306,3 +279,4 @@ O grupo utilizou Inteligência Artificial (Gemini 2.5) como ferramenta de apoio 
 | **Trechos rejeitados ou corrigidos** | - Perguntas genéricas que não refletiam a realidade do varejo alimentício foram removidas ou reescritas.<br>- Atributos e tipos físicos sugeridos pela IA foram ajustados manualmente para atender aos padrões estipulados (ex: MySQL 8, InnoDB, UTF8MB4 e precisões de `decimal` e `varchar`).<br>- Regras de negócio genéricas foram substituídas pelas regras reais da empresa (ex: conformidade com LGPD e regras de fluxo de recebimento das lojas). |
 | **Justificativa da escolha final** | O uso da IA forneceu uma base inicial sólida, mas a validação e refinamento manual foram indispensáveis para alinhar o modelo conceitual e lógico exatamente às necessidades e restrições reais da organização. |
 | **Reflexão crítica** | A IA tende a sugerir estruturas genéricas de e-commerce ou ERP tradicional. A intervenção e correção humana foram essenciais para garantir que peculiaridades do segmento (como a diferenciação entre rede e loja física, e a auditoria de gôndola por promotor) fossem modeladas corretamente. |
+](https://github.com/m-mota/Entrega_Modelagem_banco_de_dados_letty)
